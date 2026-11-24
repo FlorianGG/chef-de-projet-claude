@@ -54,6 +54,7 @@ Cycle normal (`cycle-tache.md`), avec ces livrables :
 - `.projet/config.json` avec les **vraies** commandes de contrôle, chacune lancée une fois ;
 - `.gitignore` avec `.projet/local/` et `.env` ; `.env.example` sans valeurs réelles ; `.gitattributes` avec `* text=auto eol=lf` ;
 - `.projet/ci/verrous-tests.sh` copié depuis `modeles/ci/verrous-tests.sh` du plugin ;
+- `.github/ISSUE_TEMPLATE/tache.md` copié depuis `modeles/github/ISSUE_TEMPLATE/tache.md` du plugin : le modèle d'issue du projet, à donner aussi au chat si la personne planifie depuis un chat ;
 - CI GitHub Actions sur chaque PR : les contrôles de `config.json`, puis la vérification des verrous de tests — `actions/checkout` avec `fetch-depth: 0`, puis `bash .projet/ci/verrous-tests.sh origin/${{ github.base_ref }}` ; permissions minimales (`permissions: contents: read`) ;
 - si `tests.bout_en_bout` : Playwright avec un projet mobile lancé en premier et `@axe-core/playwright`, un premier scénario sur la page d'accueil ;
 - `CLAUDE.md` du projet depuis `modeles/CLAUDE.projet.md` ;

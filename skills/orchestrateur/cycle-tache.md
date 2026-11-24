@@ -12,6 +12,18 @@ node <plugin>/scripts/journal.mjs <n> <evenement> '<json details>'
 - Niveau de confiance : 2 requis pour produire. Niveau 1 : seulement relire une PR existante (étapes 7 et 8). Niveau 0 : rien.
 - Mettre à jour la branche principale, créer la branche `tache/<n>-<court-titre>`, label `en-cours` sur l'issue.
 
+## 0 bis. Issue créée ailleurs (à la main, depuis un chat, par quelqu'un d'autre)
+
+Comparer l'issue au modèle `.github/ISSUE_TEMPLATE/tache.md` (sections reconnues par leur titre, `github.md`). Si quelque chose manque ou ne va pas, **ne pas foncer** :
+
+- **Critères d'acceptation absents ou invérifiables** : en proposer (déduits de l'issue, du cadrage et du code), les montrer à la personne, et ne continuer qu'avec son accord.
+- **Nouvel écran, données personnelles, dépendances** non précisés : les déduire si c'est évident, sinon poser la question.
+- **Contradiction** avec le cadrage, une fiche de décision ou le code existant : la signaler avec la source, la personne tranche.
+- **Trop gros** pour une PR relisible : proposer de la découper (`/projet:fonctionnalite` ou nouvelles issues), après accord.
+- **Décisions déjà prises** (section dédiée, ou décisions collées depuis un chat) : chacune devient une fiche de décision versionnée avec la tâche, après accord de la personne sur son contenu.
+
+Après accord, réécrire le corps de l'issue au format du modèle avec les identifiants `CA-<n>-<k>` (`gh issue edit`), en gardant le texte d'origine en fin d'issue sous « Texte d'origine ». Mettre le label `tache` et la milestone si elles manquent.
+
 ## 1. Tri
 
 1. Lire l'issue (critères `CA-<n>-<k>`, scénarios, `nouvel_ecran`).

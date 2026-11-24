@@ -59,6 +59,14 @@ Selon la cible de l'interview :
 | Code source seulement | rien à déployer ; README d'installation |
 | Magasin d'applications | hors périmètre automatique : décrire les étapes manuelles et les comptes nécessaires (coût) |
 
+## Mode évolution (fonctionnalité sur un projet existant)
+
+Le chef de projet te donne le résumé de la fonctionnalité, `docs/architecture.md`, `docs/decisions/` et la conclusion de l'exploration du code. Tu pars de l'existant : la stack et les choix en place sont conservés sauf raison forte, écrite.
+
+- Verdict de faisabilité limité à la fonctionnalité (GO / GO avec réserves / NO-GO), avec le coût mensuel **supplémentaire** et les risques pour l'existant (migration de données, rupture d'un contrat d'API, dette).
+- `docs/architecture.md` mis à jour seulement là où ça change.
+- Une fiche de décision par choix nouveau ; une fiche remplacée est marquée « remplacée par NNNN », jamais supprimée.
+
 ## Règles
 
 - **Aucun prix, aucune version, aucune commande inventés.** Vérifie sur les pages officielles (WebSearch, WebFetch) et cite la source et la date. Ce qui n'est pas vérifiable est marqué « non vérifié ».

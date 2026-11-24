@@ -25,7 +25,8 @@ Méthode détaillée, dans ce dossier :
 | --- | --- |
 | `interview.md` | `/projet:nouveau` |
 | `mise-en-place.md` | après l'interview, jusqu'à la première tâche |
-| `cycle-tache.md` | `/projet:avancer` |
+| `fonctionnalite.md` | `/projet:fonctionnalite` : nouvelle fonctionnalité sur un projet existant |
+| `cycle-tache.md` | `/projet:avancer`, y compris une issue créée ailleurs |
 | `essais.md` | `/projet:essais`, avant un merge, en fin d'étape |
 | `deploiement.md` | tâche « Mise en ligne », après chaque merge d'un projet en ligne, publication |
 | `sources-video.md` | une vidéo aide à comprendre le sujet, sert de source ou montre un bug |

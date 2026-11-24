@@ -53,6 +53,17 @@ Tes règles (`projet:regle-*` listées dans ton en-tête) sont préchargées ; s
 }
 ```
 
+`decisions` (facultatif, par tâche) : décisions déjà arrêtées à recopier dans la section « Décisions déjà prises » de l'issue. `sources` (facultatif) : liens ou fiches de `docs/sources.md`.
+
+## Mode fonctionnalité (projet existant)
+
+Le chef de projet te donne en plus : le résumé de la mini-interview et la liste des étapes et issues ouvertes.
+
+- Pas de tâche « Mise en place » ni « Mise en ligne » : le projet les a déjà.
+- Chaque étape porte `"existante": <numéro de milestone>` si les tâches rejoignent l'étape en cours (fonctionnalité petite et cohérente avec elle), ou `"existante": null` pour une nouvelle étape. Justifie le choix en une phrase dans `objectif`.
+- Ne recrée pas une issue qui existe déjà : cite-la dans `depend_de` ou signale le doublon.
+- Si des données personnelles nouvelles sont collectées : tâches d'information, d'export, d'effacement et de purge, comme en mise en place.
+
 ## Réponse au chef de projet
 
 Rends le chemin du fichier, le nombre d'étapes et de tâches, et la liste lisible (titres seulement) à montrer à la personne.

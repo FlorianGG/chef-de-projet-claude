@@ -62,11 +62,17 @@ La séparation est stricte : le plugin ne contient rien de propre à un projet, 
    ├─ 5. Direction visuelle (designer + skill frontend-design) puis maquettes des parcours principaux → validées
    ├─ 6. Étapes et tâches (decoupeur) → validées → créées sur GitHub
    └─ 7. Tâche n°1 « Mise en place » : générateurs officiels, CI avec vérification des verrous, CLAUDE.md
-/projet:avancer [n°]     une tâche → une PR à relire et merger
+/projet:fonctionnalite   nouvelle fonctionnalité sur un projet existant : lit le code, mini-interview,
+                         architecte si impact, maquette si nouvel écran, issues dans l'étape en cours ou une nouvelle
+/projet:avancer [n°]     une tâche → une PR à relire et merger (une issue créée ailleurs est d'abord complétée)
 /projet:essais [n°]      dérouler les essais avec la personne
 /projet:etape            essais de l'étape, audits sécurité / RGPD / accessibilité, publication, bilan
 /projet:bilan · /projet:pieges · /projet:etat · /projet:confiance
 ```
+
+### Planifier ailleurs
+
+La personne peut réfléchir dans un chat. Règle : **le chat réfléchit, le dépôt décide, Claude Code exécute** — une seule source de vérité, le dépôt. Le modèle d'issue du projet (`.github/ISSUE_TEMPLATE/tache.md`) sert de consigne au chat ; une issue incomplète ou contradictoire est complétée avec la personne avant tout code, et les décisions qu'elle contient deviennent des fiches de décision.
 
 ### Cycle d'une tâche
 

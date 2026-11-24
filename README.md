@@ -62,13 +62,24 @@ Depuis un clone local : `/plugin marketplace add ./chemin/du/clone`. Pour l'essa
 | Commande | Ce qu'elle fait |
 | --- | --- |
 | `/projet:nouveau "mon idée"` | interview, verdict de faisabilité, stack et architecture, maquettes, étapes et issues, mise en place |
-| `/projet:avancer [n°]` | fait avancer une tâche jusqu'à une PR prête à relire |
+| `/projet:fonctionnalite "idée"` | ajoute une fonctionnalité à un projet existant : lit le code, mini-interview, maquette si besoin, issues |
+| `/projet:avancer [n°]` | fait avancer une tâche jusqu'à une PR prête à relire (complète d'abord une issue créée ailleurs) |
 | `/projet:essais [n° \| etape k]` | déroule les essais manuels avec vous, transforme les échecs en bugs |
 | `/projet:etat` | où en est le projet, ce qui vous attend |
 | `/projet:etape` | clôt une étape : essais, audits sécurité / RGPD / accessibilité, publication, bilan |
 | `/projet:bilan` | ce qui a coincé, et un changement proposé (au projet ou au plugin) |
 | `/projet:pieges` | gère les pièges connus : erreurs déjà rencontrées que les relecteurs doivent toujours retrouver |
 | `/projet:confiance [0-2]` | voir ou changer ce que l'agent a le droit de faire |
+
+## Planifier depuis un chat
+
+Vous pouvez réfléchir dans un chat ou un projet Claude, puis faire développer par Claude Code. Une règle : **le chat réfléchit, le dépôt décide, Claude Code exécute.** Tout ce qui est décidé dans le chat doit finir dans le dépôt :
+
+- donnez au chat le modèle d'issue du projet (`.github/ISSUE_TEMPLATE/tache.md`) pour qu'il crée des issues au bon format, décisions comprises ;
+- `/projet:avancer` complète une issue incomplète (critères, écrans, données) en vous posant les questions qui manquent, et transforme les décisions qu'elle contient en fiches de décision ;
+- pour une fonctionnalité claire sur un projet existant, préférez `/projet:fonctionnalite` : il planifie en voyant le vrai code, ce que le chat ne voit pas.
+
+Ne gardez pas de référence dans le projet du chat (fichiers de contexte chargés, notes) : elle se périme dès que le code bouge.
 
 ## Ce qui se passe pour chaque tâche
 

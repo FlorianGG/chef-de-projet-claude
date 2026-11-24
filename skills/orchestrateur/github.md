@@ -37,24 +37,15 @@ gh api repos/<depot>/milestones -f title="Étape 1 — <nom>" -f description="<o
 
 ## Tâches (issues)
 
-Corps de l'issue (fichier temporaire, puis `gh issue create -R <depot> --title "<titre>" --body-file <f> --milestone "<titre de l'étape>" --label tache`) :
+Corps de l'issue : les sections du modèle `.github/ISSUE_TEMPLATE/tache.md` du projet (copié depuis `modeles/github/ISSUE_TEMPLATE/tache.md` du plugin à la mise en place) — Ce qu'on veut, Critères d'acceptation, Scénarios, Écrans et données, Décisions déjà prises, Sources, Dépend de — sans le commentaire d'en-tête. Fichier temporaire, puis :
 
-```markdown
-## Ce qu'on veut
-<une à trois phrases>
-
-## Critères d'acceptation
-- [ ] CA-<n>-1 : …
-- [ ] CA-<n>-2 : …
-
-## Scénarios (si bout en bout)
-- Étant donné … quand … alors …
-
-## Dépend de
-#<n> (ou « rien »)
+```
+gh issue create -R <depot> --title "<titre>" --body-file <f> --milestone "<titre de l'étape>" --label tache
 ```
 
-Le numéro `<n>` n'est connu qu'après création : créer l'issue, puis mettre à jour son corps avec les bons identifiants (`gh issue edit <n> --body-file <f>`).
+Le numéro `<n>` n'est connu qu'après création : créer l'issue, puis remplacer `CA-?-` par `CA-<n>-` (`gh issue edit <n> --body-file <f>`).
+
+Les sections se reconnaissent à leur titre, quel que soit son niveau (`##` ou `###`) : une issue créée à la main, depuis un formulaire ou depuis un chat reste lisible.
 
 ## Branche et PR
 
