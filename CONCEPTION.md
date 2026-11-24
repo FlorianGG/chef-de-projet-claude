@@ -62,6 +62,9 @@ La séparation est stricte : le plugin ne contient rien de propre à un projet, 
    ├─ 5. Direction visuelle (designer + skill frontend-design) puis maquettes des parcours principaux → validées
    ├─ 6. Étapes et tâches (decoupeur) → validées → créées sur GitHub
    └─ 7. Tâche n°1 « Mise en place » : générateurs officiels, CI avec vérification des verrous, CLAUDE.md
+/projet:adopter          projet existant : étude du dépôt (analyste-projet), cadrage léger, PR d'adoption
+                         (config depuis la CI existante, CLAUDE.md complété, workflow séparé pour les verrous),
+                         audits de départ, étapes « Mise à niveau »
 /projet:fonctionnalite   nouvelle fonctionnalité sur un projet existant : lit le code, mini-interview,
                          architecte si impact, maquette si nouvel écran, issues dans l'étape en cours ou une nouvelle
 /projet:avancer [n°]     une tâche → une PR à relire et merger (une issue créée ailleurs est d'abord complétée)
@@ -169,4 +172,4 @@ Il n'y a pas de niveau où l'agent merge seul.
 - Merge automatique, à aucun niveau.
 - Exécution sur GitHub Actions (l'orchestration tourne dans une session Claude Code locale).
 - Publication sur les magasins d'applications (étapes manuelles décrites seulement).
-- Prise en main d'un projet existant (le plugin démarre des projets neufs).
+- Reprise en masse du code existant lors d'une adoption : les règles s'appliquent au code nouveau ou modifié ; l'existant est repris par tâches explicites.

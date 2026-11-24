@@ -25,6 +25,7 @@ Méthode détaillée, dans ce dossier :
 | --- | --- |
 | `interview.md` | `/projet:nouveau` |
 | `mise-en-place.md` | après l'interview, jusqu'à la première tâche |
+| `adoption.md` | `/projet:adopter` : installer le plugin dans un projet existant |
 | `fonctionnalite.md` | `/projet:fonctionnalite` : nouvelle fonctionnalité sur un projet existant |
 | `cycle-tache.md` | `/projet:avancer`, y compris une issue créée ailleurs |
 | `essais.md` | `/projet:essais`, avant un merge, en fin d'étape |
@@ -53,6 +54,7 @@ Lancés avec l'outil Agent, `subagent_type` = `projet:<nom>`.
 
 | Agent | Rôle |
 | --- | --- |
+| `analyste-projet` | étude d'un dépôt existant avant adoption, architecture rétro-documentée |
 | `architecte` | verdict de faisabilité, stack, architecture, mise en ligne, coût, fiches de décision |
 | `designer` | parcours et maquettes HTML avant le code d'un écran |
 | `decoupeur` | étapes et tâches avec critères d'acceptation |

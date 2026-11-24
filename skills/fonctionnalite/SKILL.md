@@ -10,6 +10,6 @@ disable-model-invocation: true
 Idée : $ARGUMENTS
 
 1. Charger le skill `projet:orchestrateur` ; lire `fonctionnalite.md`, `interview.md` et `github.md` dans son dossier.
-2. Lire `.projet/config.json` (absent → ce n'est pas un projet du plugin : proposer `/projet:nouveau`).
+2. Lire `.projet/config.json` (absent → le plugin n'est pas encore installé dans ce projet : proposer `/projet:adopter` s'il y a du code, `/projet:nouveau` sinon).
 3. Si l'idée est vide : demander de la décrire en une ou deux phrases, ou de coller le plan préparé ailleurs (chat, notes).
 4. Dérouler `fonctionnalite.md`.

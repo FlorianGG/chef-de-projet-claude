@@ -62,6 +62,7 @@ Depuis un clone local : `/plugin marketplace add ./chemin/du/clone`. Pour l'essa
 | Commande | Ce qu'elle fait |
 | --- | --- |
 | `/projet:nouveau "mon idée"` | interview, verdict de faisabilité, stack et architecture, maquettes, étapes et issues, mise en place |
+| `/projet:adopter [objectif]` | installe le plugin dans un projet existant : étude, configuration, audits de départ, plan d'amélioration |
 | `/projet:fonctionnalite "idée"` | ajoute une fonctionnalité à un projet existant : lit le code, mini-interview, maquette si besoin, issues |
 | `/projet:avancer [n°]` | fait avancer une tâche jusqu'à une PR prête à relire (complète d'abord une issue créée ailleurs) |
 | `/projet:essais [n° \| etape k]` | déroule les essais manuels avec vous, transforme les échecs en bugs |
@@ -70,6 +71,14 @@ Depuis un clone local : `/plugin marketplace add ./chemin/du/clone`. Pour l'essa
 | `/projet:bilan` | ce qui a coincé, et un changement proposé (au projet ou au plugin) |
 | `/projet:pieges` | gère les pièges connus : erreurs déjà rencontrées que les relecteurs doivent toujours retrouver |
 | `/projet:confiance [0-2]` | voir ou changer ce que l'agent a le droit de faire |
+
+## Scénarios
+
+Trois parcours complets, avec qui fait quoi entre le chat, Claude Code, GitHub et vous : [SCENARIOS.md](SCENARIOS.md).
+
+1. D'une idée floue à la fin du développement.
+2. Un projet existant à améliorer et sécuriser (`/projet:adopter`).
+3. Une nouvelle fonctionnalité, plugin installé ou non.
 
 ## Planifier depuis un chat
 

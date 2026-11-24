@@ -1,0 +1,280 @@
+<title>Scénarios chef de projet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : en-tête, onglets par scénario, couloirs (toi · chat · Claude Code · GitHub) qui deviennent une seule colonne sur téléphone */
+:root {
+  --bg: #f4f6f8; --surface: #ffffff; --fg: #18202a; --muted: #55606e; --line: #d5dbe2;
+  --toi: #8b1d6b; --toi-bg: #f8e9f3;
+  --chat: #8a5200; --chat-bg: #fdf1dc;
+  --code: #1d4f9c; --code-bg: #e6eefb;
+  --gh: #1f6b3a; --gh-bg: #e3f3e8;
+  --focus: #1d4f9c;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11161c; --surface: #19212b; --fg: #e6ebf1; --muted: #a3afbd; --line: #33404e;
+  --toi: #f0a3d6; --toi-bg: #3a1c31; --chat: #f5c06b; --chat-bg: #3a2c12;
+  --code: #9cc0f7; --code-bg: #1a2c47; --gh: #8fd6a7; --gh-bg: #173524; --focus: #9cc0f7;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11161c; --surface: #19212b; --fg: #e6ebf1; --muted: #a3afbd; --line: #33404e;
+  --toi: #f0a3d6; --toi-bg: #3a1c31; --chat: #f5c06b; --chat-bg: #3a2c12;
+  --code: #9cc0f7; --code-bg: #1a2c47; --gh: #8fd6a7; --gh-bg: #173524; --focus: #9cc0f7;
+  color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 32px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); font-weight: 700; }
+h3 { font-size: 1.1rem; font-weight: 700; }
+p { margin: 0; max-width: 68ch; }
+.lead { color: var(--muted); font-size: 1.08rem; }
+code, kbd { font-family: var(--mono); font-size: 0.88em; }
+header { display: grid; gap: 14px; }
+
+.regle { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-weight: 600; }
+.regle span { display: inline-flex; align-items: center; gap: 8px; }
+.regle .fleche { color: var(--muted); font-weight: 400; }
+
+.legende { display: flex; flex-wrap: wrap; gap: 8px; }
+.acteur { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px;
+  font-size: 0.82rem; font-weight: 600; border: 1px solid currentColor; white-space: nowrap; }
+.a-toi { color: var(--toi); background: var(--toi-bg); }
+.a-chat { color: var(--chat); background: var(--chat-bg); }
+.a-code { color: var(--code); background: var(--code-bg); }
+.a-gh { color: var(--gh); background: var(--gh-bg); }
+
+[role="tablist"] { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+[role="tab"] { font: 600 0.95rem var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 10px 14px; cursor: pointer; min-height: 44px; text-align: left; }
+[role="tab"][aria-selected="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+[role="tab"] small { display: block; font-weight: 400; opacity: .8; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.scenario { display: grid; gap: 22px; }
+.citation { border-left: 4px solid var(--line); padding: 6px 0 6px 14px; font-style: italic; color: var(--muted); }
+
+.couloirs-tete { display: none; }
+.phase { display: grid; gap: 10px; }
+.phase > h3 { padding-top: 6px; }
+.etapes { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.etape { background: var(--surface); border: 1px solid var(--line); border-left-width: 4px; border-radius: 10px;
+  padding: 12px 14px; display: grid; gap: 6px; min-width: 0; }
+.etape[data-a="toi"] { border-left-color: var(--toi); }
+.etape[data-a="chat"] { border-left-color: var(--chat); }
+.etape[data-a="code"] { border-left-color: var(--code); }
+.etape[data-a="gh"] { border-left-color: var(--gh); }
+.etape .haut { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.etape .titre { font-weight: 600; }
+.etape p { color: var(--muted); font-size: 0.95rem; }
+.cmd { font-family: var(--mono); font-size: 0.85rem; background: var(--bg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 2px 6px; overflow-wrap: anywhere; }
+.note { background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 12px 14px; color: var(--muted); }
+
+@media (min-width: 900px) {
+  .couloirs-tete, .etapes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 12px; }
+  .couloirs-tete { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); padding-block: 8px;
+    border-bottom: 1px solid var(--line); }
+  .couloirs-tete .acteur { justify-self: start; }
+  .etape[data-a="toi"] { grid-column: 1; }
+  .etape[data-a="chat"] { grid-column: 2; }
+  .etape[data-a="code"] { grid-column: 3; }
+  .etape[data-a="gh"] { grid-column: 4; }
+  .etape .haut .acteur { display: none; }
+  .etapes { background:
+      linear-gradient(var(--line), var(--line)) calc(25% - 6px) 0 / 1px 100% no-repeat,
+      linear-gradient(var(--line), var(--line)) calc(50% - 0px) 0 / 1px 100% no-repeat,
+      linear-gradient(var(--line), var(--line)) calc(75% + 6px) 0 / 1px 100% no-repeat; }
+}
+
+.recap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; background: var(--surface); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--display); font-size: 0.95rem; }
+tr:last-child td { border-bottom: 0; }
+footer { color: var(--muted); font-size: 0.9rem; }
+@media (prefers-reduced-motion: no-preference) { [role="tab"] { transition: background .15s, color .15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Scénarios du chef de projet</h1>
+    <p class="lead">Trois parcours avec le plugin <code>projet</code> pour Claude Code, et qui fait quoi à chaque étape : toi, le chat claude.ai (conversation ou projet), Claude Code et GitHub.</p>
+    <p class="regle" aria-label="Règle commune">
+      <span><span class="acteur a-chat">Chat</span> réfléchit</span><span class="fleche" aria-hidden="true">→</span>
+      <span><span class="acteur a-gh">GitHub</span> décide</span><span class="fleche" aria-hidden="true">→</span>
+      <span><span class="acteur a-code">Claude Code</span> exécute</span><span class="fleche" aria-hidden="true">→</span>
+      <span><span class="acteur a-toi">Toi</span> valides et merges</span>
+    </p>
+  </header>
+
+  <div role="tablist" aria-label="Scénarios" id="onglets"></div>
+  <main id="contenu"></main>
+
+  <section aria-labelledby="t-recap" class="scenario">
+    <h2 id="t-recap">Tu veux…</h2>
+    <div class="recap">
+      <table>
+        <thead><tr><th scope="col">Besoin</th><th scope="col">Où</th><th scope="col">Commande</th></tr></thead>
+        <tbody>
+          <tr><td>Réfléchir à une idée floue</td><td><span class="acteur a-chat">Chat</span></td><td>—</td></tr>
+          <tr><td>Démarrer un projet</td><td><span class="acteur a-code">Claude Code</span></td><td><code>/projet:nouveau</code></td></tr>
+          <tr><td>Reprendre un projet existant</td><td><span class="acteur a-code">Claude Code</span></td><td><code>/projet:adopter</code></td></tr>
+          <tr><td>Ajouter une fonctionnalité</td><td><span class="acteur a-code">Claude Code</span> ou <span class="acteur a-chat">Chat</span> → issue</td><td><code>/projet:fonctionnalite</code> ou <code>/projet:avancer &lt;n°&gt;</code></td></tr>
+          <tr><td>Faire avancer le travail</td><td><span class="acteur a-code">Claude Code</span></td><td><code>/projet:avancer</code></td></tr>
+          <tr><td>Essayer ce qui a été fait</td><td><span class="acteur a-code">Claude Code</span></td><td><code>/projet:essais</code></td></tr>
+          <tr><td>Clore une étape</td><td><span class="acteur a-code">Claude Code</span></td><td><code>/projet:etape</code></td></tr>
+          <tr><td>Valider une modification</td><td><span class="acteur a-gh">GitHub</span></td><td>Merge (toi seulement)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>Plugin open source : <a href="https://github.com/FlorianGG/chef-de-projet-claude">github.com/FlorianGG/chef-de-projet-claude</a>. Détail texte : <code>SCENARIOS.md</code>.</footer>
+</div>
+
+<script>
+const A = { toi: ["Toi", "a-toi"], chat: ["Chat", "a-chat"], code: ["Claude Code", "a-code"], gh: ["GitHub", "a-gh"] };
+const S = [
+ { id: "idee", nom: "Idée floue → fin", sous: "Nouveau projet",
+   citation: "« J'aimerais une appli pour que les bénévoles de mon asso s'inscrivent aux créneaux de distribution. »",
+   phases: [
+    { t: "Dégrossir l'idée (facultatif)", e: [
+      ["toi", "Décris l'idée au chat", "Depuis ton téléphone si tu veux : qui, pour quoi, ce qui existe déjà."],
+      ["chat", "Aide à préciser", "Utilisateurs, besoins, contraintes, sources (sites, vidéos de démo). Pas d'issues : pas encore de dépôt ni de stack."],
+      ["toi", "Repars avec un résumé", "Quelques lignes, que tu colleras dans Claude Code."] ]},
+    { t: "Lancer le projet", e: [
+      ["gh", "Dépôt vide créé par toi", "Sans README ni licence."],
+      ["code", "Interview", "Vérifie git, gh, Node ; reformule l'idée ; questions par petits paquets : parcours, forme, mise en ligne, stockage, données perso, technos, tests, maquettes.", "/projet:nouveau \"…\""],
+      ["code", "Verdict de faisabilité", "GO / GO avec réserves / NO-GO, coût mensuel sourcé, nombre d'étapes, risques."],
+      ["toi", "Tranche les réserves", "Chaque réserve acceptée ou refusée."],
+      ["code", "Architecture et maquettes", "Stack expliquée, plan de mise en ligne, fiches de décision ; direction visuelle (contrastes AA) puis maquettes téléphone d'abord."],
+      ["toi", "Valide direction et maquettes", "Dans le navigateur, vue téléphone puis ordinateur."],
+      ["gh", "Étapes et issues", "Milestones et issues avec critères CA-n-k, créées après ton accord."],
+      ["gh", "PR « Mise en place »", "Squelette par générateurs officiels, CI, verrou des tests, modèle d'issue, CLAUDE.md."],
+      ["toi", "Merge", "Tu relis et tu merges."] ]},
+    { t: "Développer, une tâche à la fois", e: [
+      ["code", "Cycle de la tâche", "Description → maquette si nouvel écran → tests verrouillés → code → contrôles → relectures (code, accessibilité, sécurité, RGPD) → contre-vérification.", "/projet:avancer"],
+      ["toi", "Essais", "Un par un, ✅ ou ❌ ; un ❌ repart en correction.", "/projet:essais"],
+      ["gh", "PR prête", "Ce qui change, où regarder en priorité, ce qui a été vérifié."],
+      ["toi", "Relis les passages signalés et merge", ""],
+      ["code", "Suit le déploiement", "Si en ligne : vérifie l'URL ; un échec devient un bug."] ]},
+    { t: "Clore chaque étape", e: [
+      ["code", "Audits et bilan", "Essais de l'étape, audit sécurité complet, accessibilité, RGPD, publication, puis un seul changement proposé.", "/projet:etape"],
+      ["toi", "Accepte ou refuse le bilan", "Le changement va au projet ou au plugin, par PR."] ]}
+   ]},
+ { id: "existant", nom: "Projet existant", sous: "Améliorer, sécuriser",
+   citation: "« Une appli React + API Node d'il y a un an, sans tests front, sécurité incertaine, mal affichée sur téléphone. »",
+   phases: [
+    { t: "Préparer (facultatif)", e: [
+      ["toi", "Liste ce qui t'inquiète", "Plaintes des utilisateurs, priorités."],
+      ["chat", "Aide à hiérarchiser", "Il ne voit pas le code : ses avis restent des hypothèses."] ]},
+    { t: "Adopter", e: [
+      ["code", "Étude du dépôt sans rien modifier", "Stack, commandes de la CI, tests, conventions, mobile d'abord ou non, données perso, zones sensibles ; architecture rétro-documentée, chaque point sourcé.", "/projet:adopter sécuriser"],
+      ["code", "État de santé et questions", "Signalements d'abord (un secret versionné se traite tout de suite), puis seulement ce que l'étude n'a pas tranché."],
+      ["toi", "Cadrage léger", "Objectif, parcours principaux, ce qui ne doit pas bouger, niveau de confiance."],
+      ["gh", "PR d'adoption", "Config depuis ta CI, CLAUDE.md complété (pas remplacé), workflow séparé pour les verrous, modèle d'issue, labels."],
+      ["toi", "Merge", ""] ]},
+    { t: "Audits de départ", e: [
+      ["code", "Sécurité", "Skill d'audit Cloudflare : problèmes confirmés, passage de code, pourquoi."],
+      ["code", "Accessibilité, mobile, RGPD, tests", "Parcours impraticables, registre pré-rempli, zones critiques sans test."] ]},
+    { t: "Plan d'amélioration", e: [
+      ["gh", "Étapes « Mise à niveau »", "Grave et exploitable → ce qui bloque des utilisateurs → tests avant de toucher au code critique → le reste."],
+      ["code", "Puis cycle normal", "Les règles s'appliquent au code nouveau ou modifié ; l'existant est repris par tâches choisies avec toi.", "/projet:avancer"] ]}
+   ]},
+ { id: "fonctionnalite", nom: "Nouvelle fonctionnalité", sous: "Plugin installé ou non",
+   citation: "« Je voudrais que les bénévoles reçoivent un rappel la veille de leur créneau. »",
+   phases: [
+    { t: "A1 · Plugin installé, idée claire (recommandé)", e: [
+      ["code", "Lit l'existant", "Cadrage, décisions, issues ouvertes ; exploration du code concerné ; signale ce qui existe déjà.", "/projet:fonctionnalite \"rappel la veille\""],
+      ["toi", "Mini-interview", "Canal, destinataires, données perso nouvelles, service tiers payant."],
+      ["code", "Architecte si impact, maquette si écran", "Ici un service d'e-mails : verdict, coût en plus, fiche de décision."],
+      ["gh", "Issues + PR de doc", "Étape en cours ou nouvelle étape, après ton accord ; cadrage, décisions, registre RGPD."] ]},
+    { t: "A2 · Plugin installé, tu réfléchis dans le chat", e: [
+      ["chat", "Explore l'idée", "Avec le modèle .github/ISSUE_TEMPLATE/tache.md du projet."],
+      ["gh", "Issue au format", "Créée par le chat s'il a un connecteur GitHub, sinon par toi en collant son texte."],
+      ["code", "Vérifie l'issue avant de coder", "Critères manquants, contradictions, taille, décisions du chat → fiches de décision ; issue réécrite, texte d'origine gardé.", "/projet:avancer <n°>"] ]},
+    { t: "B · Plugin pas installé dans ce projet", e: [
+      ["code", "Adopter d'abord (recommandé)", "Si le projet va continuer à évoluer, puis cas A1.", "/projet:adopter evoluer"],
+      ["code", "Ou sans le plugin", "Petit changement ponctuel : pas d'interview, de verrou, de relecteurs séparés ni de garde-fou. Demande au moins des tests avant le code et /security-review."] ]}
+   ],
+   note: "Plugin absent du poste : les commandes /projet:* n'existent pas. Installe-le (README → Installation) puis ouvre une nouvelle session Code."
+ }
+];
+
+const onglets = document.getElementById("onglets");
+const contenu = document.getElementById("contenu");
+
+function badge(a) { const s = document.createElement("span"); s.className = "acteur " + A[a][1]; s.textContent = A[a][0]; return s; }
+
+function rendre(sc) {
+  contenu.replaceChildren();
+  const sec = document.createElement("section");
+  sec.className = "scenario"; sec.id = "panneau-" + sc.id;
+  sec.setAttribute("role", "tabpanel"); sec.setAttribute("aria-labelledby", "onglet-" + sc.id); sec.tabIndex = 0;
+  const h = document.createElement("h2"); h.textContent = sc.nom + " — " + sc.sous; sec.append(h);
+  const c = document.createElement("p"); c.className = "citation"; c.textContent = sc.citation; sec.append(c);
+  const tete = document.createElement("div"); tete.className = "couloirs-tete"; tete.setAttribute("aria-hidden", "true");
+  for (const k of ["toi", "chat", "code", "gh"]) tete.append(badge(k));
+  sec.append(tete);
+  for (const ph of sc.phases) {
+    const d = document.createElement("div"); d.className = "phase";
+    const h3 = document.createElement("h3"); h3.textContent = ph.t; d.append(h3);
+    const ol = document.createElement("ol"); ol.className = "etapes";
+    for (const [a, titre, detail, cmd] of ph.e) {
+      const li = document.createElement("li"); li.className = "etape"; li.dataset.a = a;
+      const haut = document.createElement("div"); haut.className = "haut";
+      haut.append(badge(a));
+      const t = document.createElement("span"); t.className = "titre";
+      const vh = document.createElement("span"); vh.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+      vh.textContent = A[a][0] + " : "; t.append(vh, titre);
+      haut.append(t); li.append(haut);
+      if (detail) { const p = document.createElement("p"); p.textContent = detail; li.append(p); }
+      if (cmd) { const k = document.createElement("code"); k.className = "cmd"; k.textContent = cmd; li.append(k); }
+      ol.append(li);
+    }
+    d.append(ol); sec.append(d);
+  }
+  if (sc.note) { const n = document.createElement("p"); n.className = "note"; n.textContent = sc.note; sec.append(n); }
+  contenu.append(sec);
+}
+
+function choisir(id, focus) {
+  const sc = S.find(s => s.id === id) || S[0];
+  for (const b of onglets.children) {
+    const actif = b.dataset.id === sc.id;
+    b.setAttribute("aria-selected", actif); b.tabIndex = actif ? 0 : -1;
+    if (actif && focus) b.focus();
+  }
+  rendre(sc);
+  if (location.hash !== "#" + sc.id) history.replaceState(null, "", "#" + sc.id);
+}
+
+S.forEach((sc, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.setAttribute("role", "tab"); b.id = "onglet-" + sc.id; b.dataset.id = sc.id;
+  b.setAttribute("aria-controls", "panneau-" + sc.id);
+  b.innerHTML = "";
+  b.append(document.createTextNode((i + 1) + ". " + sc.nom));
+  const sm = document.createElement("small"); sm.textContent = sc.sous; b.append(sm);
+  b.addEventListener("click", () => choisir(sc.id));
+  b.addEventListener("keydown", ev => {
+    const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[ev.key];
+    if (ev.key === "Home" || ev.key === "End" || k) {
+      ev.preventDefault();
+      const j = ev.key === "Home" ? 0 : ev.key === "End" ? S.length - 1 : (i + k + S.length) % S.length;
+      choisir(S[j].id, true);
+    }
+  });
+  onglets.append(b);
+});
+window.addEventListener("hashchange", () => choisir(location.hash.slice(1)));
+choisir(location.hash.slice(1));
+</script>
