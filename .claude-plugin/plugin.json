@@ -1,0 +1,8 @@
+{
+  "name": "projet",
+  "version": "0.1.0",
+  "description": "Chef de projet IA : part d'une idée, pose les bonnes questions, puis fait concevoir, tester, coder et relire le logiciel par des sous-agents sur GitHub. Accessibilité et mobile d'abord. La personne valide chaque proposition de modification.",
+  "author": { "name": "Florian Garcia" },
+  "license": "MIT",
+  "keywords": ["projet", "orchestration", "github", "accessibilite", "rgpd", "securite"]
+}

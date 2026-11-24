@@ -1,0 +1,14 @@
+{
+  "name": "projet-local",
+  "owner": { "name": "Florian Garcia" },
+  "metadata": {
+    "description": "Chef de projet IA pour Claude Code : de l'idée aux PR sur GitHub, accessibilité et mobile d'abord."
+  },
+  "plugins": [
+    {
+      "name": "projet",
+      "source": "./",
+      "description": "Chef de projet IA piloté sur GitHub."
+    }
+  ]
+}
