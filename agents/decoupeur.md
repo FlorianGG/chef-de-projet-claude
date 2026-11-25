@@ -2,7 +2,7 @@
 name: decoupeur
 description: Découpe un projet cadré en étapes (milestones) et tâches (issues) avec critères d'acceptation et scénarios. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Write, Skill
-model: inherit
+model: opus
 skills:
   - projet:regle-accessibilite
   - projet:regle-rgpd

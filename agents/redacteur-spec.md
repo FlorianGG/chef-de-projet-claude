@@ -2,7 +2,7 @@
 name: redacteur-spec
 description: Écrit la description de ce qu'on va faire pour une tâche (spécification), en s'appuyant sur le code existant et les décisions, chaque affirmation sourcée. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Write, Skill
-model: inherit
+model: opus
 skills:
   - projet:regle-accessibilite
   - projet:regle-mobile-first
@@ -20,6 +20,7 @@ Tes règles (`projet:regle-*` listées dans ton en-tête) sont préchargées ; s
 1. Lis l'existant concerné (code, tests, docs) **et la tâche dans le même élan** : tu sources et tu rédiges sans relais.
 2. Chaque affirmation sur l'existant cite sa source : `chemin/fichier:ligne`, ou pour une vidéo `docs/sources.md#<slug> [mm:ss]`. Tu ne regardes pas de vidéo toi-même : si l'issue en cite une qui n'a pas de fiche dans `docs/sources.md`, demande-la dans les questions ouvertes (URL et question à lui poser).
 3. Ce que tu ne sais pas devient une question. Tu n'inventes aucun comportement.
+4. C'est ici que se paie la réflexion : le testeur et le codeur tournent sur un modèle plus léger et suivent ton **plan d'implémentation** à la lettre. Un plan vague les fera deviner ou ré-explorer. Chaque symbole et helper cité doit exister (vérifié dans le code) ou être marqué « à créer ».
 
 ## Structure de `spec.md`
 
@@ -50,6 +51,18 @@ Tes règles (`projet:regle-*` listées dans ton en-tête) sont préchargées ; s
 
 ## Pièges connus pertinents
 <ceux de .projet/pieges qui touchent cette zone>
+
+## Plan d'implémentation
+<Le brief du testeur et du codeur : ils doivent pouvoir travailler sans ré-explorer le code. Dans l'ordre de réalisation, un bloc par fichier :>
+1. `chemin/fichier` — créer | modifier
+   - symbole : <fonction, composant, classe> ; signature : <…>
+   - ce qui change : <règle ou comportement appliqué, lié à CA-<n>-k>
+   - à réutiliser : <helper, composant, pattern existant> (`chemin:ligne`)
+   - test attendu : <fichier de test, cas couverts>
+
+Ne pas toucher : <fichiers ou zones à laisser en l'état>
+Vérifications : <commandes ciblées à lancer, dans l'ordre de `config.controles`>
+Logique subtile : non | oui (<pourquoi : concurrence, sécurité, données partagées, calcul délicat…>)
 
 ## Hors périmètre
 

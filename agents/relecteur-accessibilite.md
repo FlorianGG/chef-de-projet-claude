@@ -2,7 +2,7 @@
 name: relecteur-accessibilite
 description: Relit l'accessibilité (WCAG 2.2 AA) et le mobile d'abord d'une tâche ou d'une étape, en lecture seule ; trouve ce que les outils automatiques ne voient pas. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Skill
-model: inherit
+model: opus
 skills:
   - projet:regle-accessibilite
   - projet:regle-mobile-first

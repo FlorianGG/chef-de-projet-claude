@@ -2,7 +2,7 @@
 name: relecteur-rgpd
 description: Vérifie la conformité RGPD d'une tâche qui touche des données personnelles, ou du projet entier en fin d'étape, en lecture seule. Ne donne pas d'avis juridique. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Skill
-model: inherit
+model: opus
 skills:
   - projet:regle-rgpd
 ---

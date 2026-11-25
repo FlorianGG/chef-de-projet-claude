@@ -2,7 +2,7 @@
 name: relecteur-code
 description: Relit le diff d'une tâche (justesse, respect de la description, lisibilité, tests) indépendamment du codeur, en lecture seule. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Skill
-model: inherit
+model: opus
 skills:
   - projet:regle-tests
   - projet:regle-securite

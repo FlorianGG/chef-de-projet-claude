@@ -43,6 +43,8 @@ Lancer `projet:redacteur-spec` avec : l'issue, `docs/cadrage.md`, `docs/architec
 
 - Questions ouvertes, ou niveau sensible : présenter la description à la personne et obtenir sa validation. Ses réponses vont dans la spec ; une décision durable devient une fiche de décision (`modeles/decision.md`).
 - Sinon : continuer.
+- Vérifier que le **plan d'implémentation** est assez précis pour être exécuté sans ré-explorer (fichiers, symboles, helpers, tests). Sinon, le renvoyer au rédacteur sur les points flous.
+- La description étant écrite, la conversation peut être compactée sans perte : le proposer à la personne si la session est longue.
 
 ## 3. Maquette (si `nouvel_ecran` et maquettes choisies)
 
@@ -63,7 +65,16 @@ Tâche sans code testable (documentation, configuration pure) : `tests: aucun` d
 
 ## 5. Code
 
-Lancer `projet:codeur` **avec un contexte neuf** : `<t>/spec.md`, la liste des tests verrouillés, la maquette éventuelle, `CLAUDE.md`, l'architecture, et au tour 2+ `<t>/constats-confirmes.json` et l'extrait en échec de `<t>/controles.json`. Rien d'autre.
+**Premier passage** : lancer `projet:codeur` **avec un contexte neuf** : `<t>/spec.md` (dont le plan d'implémentation), la liste des tests verrouillés, la maquette éventuelle, `CLAUDE.md`, l'architecture. Rien d'autre.
+
+**Modèle** : le codeur tourne sur Sonnet (en-tête de l'agent). Le relancer sur Opus (paramètre `model: "opus"` de l'outil Agent) quand le niveau de risque est **sensible** ou que la spec indique « Logique subtile : oui ». Le dire à la personne en une ligne.
+
+**À son retour** :
+- **Doutes** : les trancher avec le plan ou, si c'est un vrai choix, le poser à la personne (problème / options / recommandation). Puis renvoyer au **même** codeur (outil SendMessage, son identifiant) le seul point tranché, sans tout redonner.
+- **Écarts au plan** : contrôler le diff contre le plan avec `git diff --stat` puis seulement les fichiers qui s'en écartent, sans tout relire. Un écart non justifié se traite comme un doute.
+- Une correction d'une ou deux lignes évidente : la demander quand même au codeur (tu n'écris pas le code), groupée avec les autres points.
+
+**Corrections (tours 2+)** : par SendMessage au même codeur, avec seulement les constats confirmés et l'extrait en échec de `<t>/controles.json`. Nouveau codeur en contexte neuf seulement si le premier ne répond plus ou si la spec a été réécrite (retour à l'étape 2).
 
 Si le codeur conteste un test : ne pas le laisser le modifier. Contestation fondée (test faux par rapport à la spec) → relancer le testeur sur ce point, re-sceller, committer avec un message qui le dit. Noter l'événement.
 
@@ -75,6 +86,8 @@ node <plugin>/scripts/controles.mjs --sortie <t>/controles.json
 ```
 
 Arrêt au premier échec ; retour à l'étape 5 avec **seulement** le contrôle fautif et la fin de son journal. Rien ne part en relecture sur du rouge.
+
+Ces deux scripts ne coûtent presque rien en tokens : ils restent la porte d'entrée des relectures même si le codeur a déjà lancé ses vérifications ciblées. Ce qu'on ne rejoue pas, ce sont les vérifications faites **par un agent** : ne pas relire tout le diff soi-même, ne pas relancer à la main un test que le script a déjà passé.
 
 ## 7. Relectures, en parallèle
 
@@ -88,7 +101,7 @@ En parallèle des relectures : lancer `projet:redacteur-essais` (mode tâche) �
 
 Lancer `projet:contre-verificateur` avec les constats, la spec et le diff. Enregistrer son JSON dans `<t>/constats-confirmes.json`.
 
-- Confirmés → étape 5 (tour suivant, événement `tour`), puis contrôles, puis **seuls les relecteurs concernés** relisent **seulement les passages modifiés**.
+- Confirmés → étape 5 (tour suivant par SendMessage au même codeur, événement `tour`), puis contrôles, puis **seuls les relecteurs concernés** relisent **seulement les passages modifiés** (SendMessage au même relecteur s'il répond encore, avec le nouveau diff limité à ces passages).
 - Remet la spec en cause → étape 2.
 - Chaque bloquant confirmé devient un **candidat piège connu** (`apprentissage.md`).
 

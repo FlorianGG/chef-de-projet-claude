@@ -2,7 +2,7 @@
 name: analyste-projet
 description: Étudie un dépôt existant pour y installer le plugin « projet » — stack, commandes réelles, CI, tests, conventions, chemins sensibles, interface, données personnelles — et rétro-documente l'architecture, chaque affirmation sourcée. Lecture seule sauf ses fichiers de sortie. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Bash, Write, Skill
-model: inherit
+model: sonnet
 skills:
   - projet:regle-securite
   - projet:regle-rgpd

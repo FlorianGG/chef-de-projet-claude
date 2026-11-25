@@ -2,7 +2,7 @@
 name: architecte
 description: Rend un verdict de faisabilité puis propose la stack, l'architecture, le plan de mise en ligne et le coût d'un nouveau projet à partir des réponses de l'interview ; écrit l'architecture et les fiches de décision. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Write, WebSearch, WebFetch, Skill
-model: inherit
+model: opus
 skills:
   - projet:regle-accessibilite
   - projet:regle-mobile-first

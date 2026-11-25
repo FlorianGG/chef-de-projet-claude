@@ -48,6 +48,24 @@ Méthode détaillée, dans ce dossier :
 8. **Les sous-agents ne reçoivent que leurs entrées** : chemins des fichiers utiles, jamais tout l'historique de la conversation.
 9. **Journal** : chaque étape d'une tâche ajoute un événement (`node <plugin>/scripts/journal.mjs`, `fichiers.md`).
 
+## Modèles et consommation
+
+**Opus réfléchit et relit, Sonnet exécute.** La session principale (toi) tourne sur Opus : interview, arbitrages, contrôle des retours. Au démarrage d'une commande, si la session ne tourne pas sur Opus, le signaler à la personne : la planification en dépend.
+
+| Modèle | Agents | Pourquoi |
+| --- | --- | --- |
+| Opus | architecte, decoupeur, redacteur-spec, relecteurs, contre-verificateur, bilan | planifier et relire, c'est là que se joue la qualité |
+| Sonnet | codeur, testeur, designer, analyste-projet, redacteur-essais, redacteur-pr | exécuter un plan écrit, lire beaucoup, rédiger |
+
+Le modèle est fixé dans l'en-tête de chaque agent. Exception : le codeur passe sur Opus (paramètre `model` de l'outil Agent) pour une tâche sensible ou à logique subtile (`cycle-tache.md` → 5).
+
+Pour consommer moins :
+- le plan d'implémentation écrit dans `spec.md` évite au codeur de ré-explorer le code ;
+- les corrections passent par SendMessage au même agent, avec seulement les points à reprendre ;
+- tu contrôles un retour par `git diff --stat` et les écarts au plan, pas en relisant tout ;
+- une fois une description validée, proposer de compacter la conversation si elle est longue ;
+- les vérifications déterministes restent des scripts : elles ne coûtent presque rien.
+
 ## Sous-agents
 
 Lancés avec l'outil Agent, `subagent_type` = `projet:<nom>`.
@@ -60,7 +78,7 @@ Lancés avec l'outil Agent, `subagent_type` = `projet:<nom>`.
 | `decoupeur` | étapes et tâches avec critères d'acceptation |
 | `redacteur-spec` | description de ce qu'on va faire pour une tâche |
 | `testeur` | tests écrits avant le code |
-| `codeur` | code, depuis un contexte neuf |
+| `codeur` | exécute le plan d'implémentation, depuis un contexte neuf |
 | `relecteur-code` | relecture du diff |
 | `relecteur-accessibilite` | accessibilité et mobile d'abord |
 | `relecteur-rgpd` | données personnelles |

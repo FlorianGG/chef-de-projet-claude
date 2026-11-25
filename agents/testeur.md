@@ -2,7 +2,7 @@
 name: testeur
 description: Écrit les tests d'une tâche avant le code, à partir de sa description et de ses contrats, indépendamment du codeur. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Write, Edit, Bash, Skill
-model: inherit
+model: sonnet
 skills:
   - projet:regle-tests
   - projet:regle-accessibilite

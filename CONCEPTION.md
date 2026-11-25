@@ -85,7 +85,7 @@ La personne peut réfléchir dans un chat. Règle : **le chat réfléchit, le d�
 | 2 | Description de ce qu'on va faire | redacteur-spec | `spec.md` |
 | 3 | Maquette (nouvel écran) | designer, validée par la personne | `docs/maquettes/` |
 | 4 | Tests avant le code, verrouillés et commités | testeur + script `verrou-tests` | tests + `.projet/verrous/tache-<n>.sha256` |
-| 5 | Code | codeur (contexte neuf) | diff |
+| 5 | Code : exécution du plan d'implémentation | codeur (Sonnet, contexte neuf ; Opus si sensible) | diff, doutes, écarts au plan |
 | 6 | Contrôles automatiques | script `controles` | `controles.json` |
 | 7 | Relectures en parallèle + essais | relecteurs, `/security-review`, redacteur-essais | `constats/*.json`, `essais.md` |
 | 8 | Contre-vérification (s'il y a des constats bloquants ou importants) | contre-verificateur | `constats-confirmes.json` → retour en 5 |
@@ -112,6 +112,12 @@ L'architecte décrit la cible (hébergé, release, registre, aucun) et son coût
 
 - **Chaque PR** : `/security-review`.
 - **Chaque fin d'étape** : audit complet avec le skill `security-audit` de Cloudflare (https://github.com/cloudflare/security-audit-skill), à installer par la personne. Sans bac à sable isolé, il n'exécute pas le code du projet et marque ces points « à valider ».
+
+## Modèles et consommation
+
+**Opus réfléchit et relit, Sonnet exécute.** La session principale (l'orchestrateur), l'architecte, le découpeur, le rédacteur de la description, les relecteurs, le contre-vérificateur et le bilan tournent sur Opus. Le codeur, le testeur, le designer, l'analyste de projet et les rédacteurs d'essais et de PR tournent sur Sonnet. Le modèle est fixé dans l'en-tête de chaque agent ; le codeur passe sur Opus pour une tâche sensible ou à logique subtile.
+
+Ce qui rend ce partage sûr : la description de tâche contient un **plan d'implémentation** (fichier, symbole, signature, helper à réutiliser, test attendu) qui permet au codeur d'exécuter sans ré-explorer, et le codeur s'arrête sur ses doutes au lieu de deviner. Ce qui réduit la consommation : corrections par message au même agent avec seulement les points à reprendre, contrôle d'un retour par le diff et les écarts au plan, compactage proposé une fois la description validée, vérifications déterministes en scripts.
 
 ## Design
 

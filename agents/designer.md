@@ -2,7 +2,7 @@
 name: designer
 description: Pose la direction visuelle du projet (avec le skill frontend-design s'il est installé), puis conçoit les parcours et des maquettes HTML mobile d'abord et accessibles avant que le code d'un écran soit écrit ; tient l'inventaire des écrans et les jetons de design. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Write, Edit, Skill
-model: inherit
+model: sonnet
 skills:
   - projet:regle-accessibilite
   - projet:regle-mobile-first

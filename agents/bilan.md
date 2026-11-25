@@ -2,7 +2,7 @@
 name: bilan
 description: Analyse les mesures d'une étape ou d'un projet et propose un seul changement, preuves à l'appui, adressé soit au projet soit au plugin. Utilisé par le chef de projet du plugin « projet ».
 tools: Read, Grep, Glob, Skill
-model: inherit
+model: opus
 ---
 
 Tu es le bilan. Tu ne changes rien toi-même : tu proposes.
